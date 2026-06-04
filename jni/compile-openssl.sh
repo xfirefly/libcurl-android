@@ -14,8 +14,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-APP_ABI=(armeabi-v7a arm64-v8a x86-64)
+# armeabi-v7a arm64-v8a
+APP_ABI=( armeabi-v7a   )
 
 BASE_PATH=$(
 	cd "$(dirname $0)"
@@ -65,7 +65,7 @@ compile() {
 	export PATH=$TOOLCHAIN:$TOOLCHAIN_2:$PATH
 	safeMakeDir $BUILD_PATH/openssl/$ABI
 	checkExitCode $?
-	./Configure $ARCH --prefix=$BUILD_PATH/openssl/$ABI --openssldir=$BUILD_PATH/openssl/$ABI -D__ANDROID_API__=$API
+	./Configure $ARCH --prefix=$BUILD_PATH/openssl/$ABI --openssldir=$BUILD_PATH/openssl/$ABI -D__ANDROID_API__=$API no-shared no-asm -fPIC -DOPENSSL_PIC no-tests no-unit-test no-docs 
 	checkExitCode $?
 	# clean
 	make clean

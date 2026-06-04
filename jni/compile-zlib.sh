@@ -14,8 +14,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-APP_ABI=(armeabi-v7a arm64-v8a x86-64)
+# armeabi-v7a arm64-v8a
+APP_ABI=( armeabi-v7a  )
 
 BASE_PATH=$(
 	cd "$(dirname $0)"
@@ -77,7 +77,7 @@ compile() {
 	export LD=$TOOLCHAIN/ld
 	export RANLIB=$TOOLCHAIN/llvm-ranlib
 	export STRIP=$TOOLCHAIN/llvm-strip
-	export CFLAGS="-I$SYSROOT/usr/include --sysroot=$SYSROOT $CFLAGS"
+	export CFLAGS="-I$SYSROOT/usr/include --sysroot=$SYSROOT $CFLAGS -fPIC"
 	# zlib configure
 	export CROSS_PREFIX="$TOOLCHAIN/$TARGET-"
 	# config
