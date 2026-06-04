@@ -77,7 +77,7 @@ compile() {
 	export LD=$TOOLCHAIN/ld
 	export RANLIB=$TOOLCHAIN/llvm-ranlib
 	export STRIP=$TOOLCHAIN/llvm-strip
-	export CFLAGS="-I$SYSROOT/usr/include --sysroot=$SYSROOT $CFLAGS -fPIC"
+	export CFLAGS="-I$SYSROOT/usr/include --sysroot=$SYSROOT -fPIC $CFLAGS "
 	# zlib configure
 	export CROSS_PREFIX="$TOOLCHAIN/$TARGET-"
 	# config

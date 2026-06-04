@@ -70,6 +70,7 @@ compile() {
 	# clean
 	make clean
 	checkExitCode $?
+	sed -E -i '' -e '/[.]hidden.*OPENSSL_armcap_P/d' -e '/[.]extern.*OPENSSL_armcap_P/ {p; s/extern/hidden/; }' crypto/*arm*pl crypto/*/asm/*arm*pl
 	# make
 	make -j4 depend
 	checkExitCode $?

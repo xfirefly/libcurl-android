@@ -14,8 +14,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-APP_ABI=(armeabi-v7a arm64-v8a x86-64)
+# armeabi-v7a arm64-v8a
+APP_ABI=( armeabi-v7a )
 
 BASE_PATH=$(
 	cd "$(dirname $0)"
@@ -84,7 +84,7 @@ compile() {
 	export RANLIB=$TOOLCHAIN/llvm-ranlib
 	export NM=$TOOLCHAIN/llvm-nm
 	export STRIP=$TOOLCHAIN/llvm-strip
-	export CFLAGS="--sysroot=$SYSROOT $CFLAGS"
+	export CFLAGS="--sysroot=$SYSROOT -fPIC $CFLAGS"
 	export CPPFLAGS="-I$SYSROOT/usr/include --sysroot=$SYSROOT"
 	export LDFLAGS="-L$BUILD_PATH/openssl/$ABI/lib -L$BUILD_PATH/zlib/$ABI/lib"
 	export LIBS="-lssl -lcrypto -lc++ -lz"
@@ -101,7 +101,7 @@ compile() {
 		--with-ssl=$BUILD_PATH/openssl/$ABI \
 		--with-zlib=$BUILD_PATH/zlib/$ABI \
 		--enable-static \
-		--enable-shared \
+		--disable-shared \
 		--disable-verbose \
 		--enable-threaded-resolver \
 		--enable-ipv6
